@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add New Herb</title>
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" th:href="@{/css/casestudy.css}"/>
+</head>
+<body>
+	<div align="center">
+		<h1>Register New Herb to Database</h1>
+		<br/>
+		<form action="#" th:action="@{/save}" th:object="${product}" method="post">
+		<table border="0" cellpadding="10">			
+			<tr>
+				<td>Herb Name</td>
+				<td><input type="text" th:field="*{name}" required/></td>
+			</tr>
+			
+			<tr>
+				<td>Uses</td>
+				<td><input type="text" th:field="*{uses}" required/></td>
+			</tr>
+			
+			<tr>
+				<td>Vitamins</td>
+				<td><input type="text" th:field="*{vitamins}" required/></td>
+			</tr>
+			<tr>
+			
+				<td class="text-center" colspan="2"><button type="submit" class="btn btn-outline-success">Save</button></td>
+			
+			</tr>
+		</table>		
+		</form>
+	</div>
+</body>
+</html>

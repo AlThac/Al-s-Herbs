@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" th:href="@{/css/casestudy.css}"/>	
+</head>
+<body>
+	<div class="container">
+		<div class="container text-center">		
+			<form th:action="@{/logout}" method="post">
+				<p>
+					Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+				</p>
+				
+				<input type="submit" value="Sign Out" />
+			</form>
+		</div>
+		<div>
+			<h1>Al's Herbs</h1>
+		</div>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg bg-light navbar-light">
+			<div class="container-fluid">
+				<ul class="navbar-nav">
+				
+					<li class="nav-item">
+			<h6><a th:href="@{/index}">Home</a></h6>
+					</li>
+					&nbsp;
+					<li class="nav-item">
+			<h6><a th:href="@{/list_users}">List Users</a></h6>
+					</li>
+			
+				</ul>	
+			</div>
+		</nav>
+		<div class="container text-center">
+			<h2>Herbal Database</h2>
+		</div>
+		<div>
+		
+		<form th:action="@{/products}" method="get">
+			<strong>Filter: </strong>
+			<input type="text" name="keyword" th:value="${keyword}"required/>
+			&nbsp;
+			<input type="submit" value="Search"/>
+			&nbsp;
+			<input type="button" value="Clear" onclick="clearFilter()"/>
+		</form>
+			<table class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Uses</th>
+						<th>Vitamins</th>
+						<th>Edit/Save</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product: ${listProducts}">
+						<td th:text="${product.id}">ID</td>
+						<td th:text="${product.name}">Name</td>
+						<td th:text="${product.uses}">Uses</td>
+						<td th:text="${product.vitamins}">Vitamins</td>	
+						<td>
+							<a th:href="@{'/edit/'+ ${product.id}}">Edit</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a th:href="@{'/delete/'+ ${product.id}}">Delete</a>
+						</td>			
+						
+					</tr>
+				</tbody>
+			</table>
+			<div class="container text-center">
+			<img th:src="@{/images/herbthumbnail.jpg}" class="rounded-circle"/>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function clearFilter(){
+			window.location='/products';
+		}
+	</script>
+</body>
+</html>
